@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z'></path></svg>">
+    <title>CryptoVault - New UI Test</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #48bb78;
+            --error-color: #f56565;
+            --bg-primary: #ffffff;
+            --text-primary: #2d3748;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 16px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            margin-bottom: 16px;
+            padding-top: 8px;
+        }
+
+        .logo-small {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 6px;
+            box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+        }
+
+        .logo-small svg {
+            width: 12px;
+            height: 12px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 12px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        
+        .nav-pills {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-pill {
+            padding: 5px 10px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-pill:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-pill.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 1px 4px rgba(102, 126, 234, 0.3);
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 16px;
+            margin: 0 auto 12px;
+            max-width: 480px;
+        }
+        
+        .form-group {
+            margin-bottom: 12px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin-bottom: 4px;
+            font-size: 12px;
+        }
+        
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+        
+        textarea::placeholder, input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(102, 126, 234, 0.4);
+        }
+        
+        .alert {
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid;
+            font-size: 12px;
+        }
+        
+        .alert-success {
+            background: linear-gradient(135deg, rgba(72, 187, 120, 0.1) 0%, rgba(56, 161, 105, 0.1) 100%);
+            color: #22543d;
+            border-left-color: #48bb78;
+        }
+        
+        .alert-danger {
+            background: linear-gradient(135deg, rgba(245, 101, 101, 0.1) 0%, rgba(229, 62, 62, 0.1) 100%);
+            color: #742a2a;
+            border-left-color: #f56565;
+        }
+        
+        .result-box {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(72, 187, 120, 0.3);
+            border-radius: 6px;
+            padding: 8px;
+            margin-top: 8px;
+            font-size: 11px;
+            word-break: break-all;
+        }
+        
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 4px;
+            font-size: 10px;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .particle-1 {
+            width: 30px;
+            height: 30px;
+            background: #f093fb;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .particle-2 {
+            width: 45px;
+            height: 45px;
+            background: #4facfe;
+            top: 70%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+        
+        .particle-3 {
+            width: 25px;
+            height: 25px;
+            background: #667eea;
+            bottom: 20%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(180deg); }
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 4px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+
+        .github-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 10px;
+            line-height: 1.3;
+        }
+        
+        .accordion-item {
+            margin-bottom: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-header:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .accordion-header h4 {
+            margin: 0;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .accordion-icon {
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .accordion-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .accordion-content.active {
+            padding: 10px 12px;
+            max-height: 200px;
+        }
+        
+        .accordion-content p {
+            margin: 0;
+            font-size: 11px;
+            line-height: 1.4;
+            text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 8px; }
+            h1 { font-size: 1.2rem; }
+            .subtitle { font-size: 0.75rem; }
+            .glass { padding: 12px; margin: 0 2px 8px; }
+            .nav-pills { flex-direction: column; gap: 2px; }
+            .nav-pill { width: 100%; padding: 4px 8px; font-size: 10px; }
+            .logo-small { width: 16px; height: 16px; }
+            .logo-small svg { width: 10px; height: 10px; }
+            .github-link { padding: 4px 8px; font-size: 10px; }
+            .accordion-header { padding: 8px 10px; }
+            .accordion-header h4 { font-size: 11px; }
+            .accordion-content p { font-size: 10px; }
+            .btn-primary { padding: 8px; font-size: 11px; }
+            textarea, input { padding: 8px; font-size: 11px; }
+            .footer { font-size: 9px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles">
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+    </div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo-small">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+            </div>
+            <h1>CryptoVault</h1>
+            <p class="subtitle">Military-grade encryption for your most sensitive messages</p>
+            <a href="https://github.com/yourusername/encryptdecrypt2" target="_blank" rel="noopener noreferrer" class="github-link">
+                <svg style="width: 16px; height: 16px; margin-right: 4px;" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+            </a>
+        </header>
+        
+        <nav class="nav">
+            <div class="nav-pills">
+                <button class="nav-pill active" onclick="showSection('encrypt')">🔒 Encrypt</button>
+                <button class="nav-pill" onclick="showSection('decrypt')">🔓 Decrypt</button>
+                <button class="nav-pill" onclick="showSection('faq')">❓ FAQ</button>
+            </div>
+        </nav>
+        
+        <main>
+            <div id="encrypt-section" class="glass">
+                <h3 class="text-base font-bold text-white mb-2">Encrypt Your Message</h3>
+                <form onsubmit="handleEncrypt(event)">
+                    <div class="form-group">
+                        <label>Your Secret Message</label>
+                        <textarea id="encrypt-text" placeholder="Type your confidential text here..." rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Create a Password</label>
+                        <input type="password" id="encrypt-password" placeholder="Choose a strong password" required>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 10px; margin-top: 3px;">🔒 This password will be required to decrypt your message</p>
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <span>🔒</span>
+                        Encrypt Message
+                    </button>
+                </form>
+                <div id="encrypt-result" style="display: none;"></div>
+            </div>
+            
+            <div id="decrypt-section" class="glass" style="display: none;">
+                <h3 class="text-base font-bold text-white mb-2">Decrypt Your Message</h3>
+                <form onsubmit="handleDecrypt(event)">
+                    <div class="form-group">
+                        <label>Encrypted Message</label>
+                        <textarea id="decrypt-text" placeholder="Paste the encrypted text here..." rows="3" required></textarea>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 10px; margin-top: 3px;">📋 Paste the encrypted message you received</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Password</label>
+                        <input type="password" id="decrypt-password" placeholder="Enter the password used for encryption" required>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 10px; margin-top: 3px;">🔑 This must match the password used during encryption</p>
+                    </div>
+                    <button type="submit" class="btn-primary" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);">
+                        <span>🔓</span>
+                        Decrypt Message
+                    </button>
+                </form>
+                <div id="decrypt-result" style="display: none;"></div>
+            </div>
+            
+            <div id="faq-section" class="glass" style="display: none;">
+                <h3 class="text-base font-bold text-white mb-2">Frequently Asked Questions</h3>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h4 class="font-semibold text-white text-xs">Is my data secure?</h4>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-gray-300 text-xs">Yes! We use RSA 2048-bit asymmetric encryption, which is military-grade security. Your messages are encrypted on your device and can only be decrypted with the password you provide. We never store your passwords or plaintext messages.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h4 class="font-semibold text-white text-xs">Do you store my personal information?</h4>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-gray-300 text-xs">No! This application does not require user accounts or store any personal information. We only temporarily store encrypted keys (not passwords or messages) for 3 days to enable decryption, after which they are automatically deleted.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h4 class="font-semibold text-white text-xs">What happens to my encrypted data?</h4>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-gray-300 text-xs">We do NOT store your encrypted messages or plaintext data. You receive the encrypted data immediately and should save it locally. We only temporarily store the decryption key (encrypted with your password) for 3 days to enable decryption. After that, the key is automatically deleted. Without the key, your data remains secure but cannot be decrypted.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h4 class="font-semibold text-white text-xs">How long are my keys stored?</h4>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-gray-300 text-xs">Encrypted keys are automatically deleted after 3 days using DynamoDB's TTL (Time To Live) feature. This ensures temporary storage without manual cleanup while maintaining security.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h4 class="font-semibold text-white text-xs">Can I use this for sensitive business data?</h4>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-gray-300 text-xs">This tool provides strong encryption suitable for most personal and small business use cases. For highly sensitive or regulated data, consider dedicated encryption software with additional security features like key rotation and audit trails.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h4 class="font-semibold text-white text-xs">What encryption algorithm is used?</h4>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-gray-300 text-xs">We use RSA 2048-bit asymmetric encryption for the data, combined with AES-256 for key protection. This hybrid approach provides both security and performance for web applications.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h4 class="font-semibold text-white text-xs">Is the source code available?</h4>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p class="text-gray-300 text-xs">Yes! The complete source code is available on GitHub. This ensures transparency and allows security researchers to verify the encryption implementation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p><strong>Disclaimer:</strong> This tool is provided "as is" for convenience. Use strong passwords and understand encryption limitations.</p>
+            <p>No personal data is stored. Keys expire after 3 days. For security-critical applications, use dedicated encryption software.</p>
+        </footer>
+    </div>
+    
+    <script>
+        function showSection(section) {
+            document.querySelectorAll('.nav-pill').forEach(pill => pill.classList.remove('active'));
+            document.querySelectorAll('[id$="-section"]').forEach(sec => sec.style.display = 'none');
+
+            event.target.classList.add('active');
+            document.getElementById(section + '-section').style.display = 'block';
+        }
+        
+        function handleEncrypt(event) {
+            event.preventDefault();
+            const text = document.getElementById('encrypt-text').value;
+            const password = document.getElementById('encrypt-password').value;
+            
+            if (!text || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Simulate encryption
+            const result = btoa(text + '::' + password);
+            const resultDiv = document.getElementById('encrypt-result');
+            resultDiv.innerHTML = `
+                <div class="alert alert-success mt-2">
+                    <h5 class="font-semibold mb-1 text-xs">🎉 Encrypted Successfully!</h5>
+                    <div class="result-box">
+                        <code style="word-break: break-all;">${result}</code>
+                    </div>
+                    <p class="text-xs mt-1">💡 Save this encrypted message and remember your password.</p>
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+        }
+        
+        function handleDecrypt(event) {
+            event.preventDefault();
+            const text = document.getElementById('decrypt-text').value;
+            const password = document.getElementById('decrypt-password').value;
+            
+            if (!text || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            try {
+                // Simulate decryption
+                const decoded = atob(text);
+                const parts = decoded.split('::');
+                if (parts.length === 2 && parts[1] === password) {
+                    const resultDiv = document.getElementById('decrypt-result');
+                    resultDiv.innerHTML = `
+                        <div class="alert alert-success mt-2">
+                            <h5 class="font-semibold mb-1 text-xs">🎉 Decrypted Successfully!</h5>
+                            <div class="result-box">
+                                <p>${parts[0]}</p>
+                            </div>
+                        </div>
+                    `;
+                    resultDiv.style.display = 'block';
+                } else {
+                    throw new Error('Invalid encrypted data or password');
+                }
+            } catch (error) {
+                const resultDiv = document.getElementById('decrypt-result');
+                resultDiv.innerHTML = `
+                    <div class="alert alert-danger mt-2">
+                        <strong class="text-xs">❌ Decryption Failed:</strong> ${error.message}
+                    </div>
+                `;
+                resultDiv.style.display = 'block';
+            }
+        }
+        
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.accordion-icon');
+            
+            // Close all other accordions
+            document.querySelectorAll('.accordion-content').forEach(otherContent => {
+                if (otherContent !== content) {
+                    otherContent.classList.remove('active');
+                    otherContent.previousElementSibling.querySelector('.accordion-icon').textContent = '▼';
+                }
+            });
+            
+            // Toggle current accordion
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.textContent = '▼';
+            } else {
+                content.classList.add('active');
+                icon.textContent = '▲';
+            }
+        }
+    </script>
+</body>
+</html>

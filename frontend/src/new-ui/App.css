@@ -1,0 +1,229 @@
+/* New UI Styles - Premium Design System */
+
+/* Main app container */
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated background particles */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: float 20s infinite ease-in-out;
+}
+
+.particle-1 {
+  width: 80px;
+  height: 80px;
+  background: #f093fb;
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.particle-2 {
+  width: 120px;
+  height: 120px;
+  background: #4facfe;
+  top: 70%;
+  right: 10%;
+  animation-delay: 5s;
+}
+
+.particle-3 {
+  width: 60px;
+  height: 60px;
+  background: #667eea;
+  bottom: 20%;
+  left: 50%;
+  animation-delay: 10s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Header styles */
+.header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.logo-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+  margin-bottom: 24px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.app-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.app-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 32px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.github-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation styles */
+.nav-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 10;
+}
+
+.nav-pills {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.nav-pill {
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-pill:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-pill.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.nav-pill.active:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+/* Main content area */
+.main-content {
+  position: relative;
+  z-index: 10;
+  padding: 0 20px 60px;
+}
+
+/* Footer styles */
+.footer {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer strong {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app-title {
+    font-size: 2.5rem;
+  }
+  
+  .app-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .nav-pills {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .nav-pill {
+    width: 100%;
+  }
+  
+  .logo-container {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .app-container {
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  }
+}
